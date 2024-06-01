@@ -1,0 +1,15 @@
+exports.registration = {
+  title: page.locator("[data-testid='salutation']"),
+  optionFemale: page.locator("[data-testid='female']"),
+  optionMale: page.locator("[data-testid='male']"),
+  genderneutralOption: page.locator("[data-testid='genderneutral']"),
+  defaultOption: page.locator("[data-testid='defaultValue']"),
+  firstName: page.locator("[data-testid='firstNameInput']"),
+  lastName: page.locator("[data-testid='lastNameInput']"),
+  email: page.locator("[data-testid='emailInput']"),
+  password: page.locator("[data-testid='passwordInput']"),
+  passwordRepeat: page.locator("[data-testid='password2Input']"),
+  subscriptionCheckBox: page.locator("[data-testid='newsletterCheckbox']"),
+  consentCheckBox: page.locator("[data-testid='agbCheckbox']"),
+  nextButton: page.locator("[data-testid='register-submit']"),
+}
