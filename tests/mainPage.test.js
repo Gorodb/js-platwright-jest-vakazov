@@ -1,6 +1,9 @@
-const {describe, test, beforeAll, expect} = require("@jest/globals");
-const {MainPage, LoginPage, CookiesPage, RegistrationPage} = require("../pageObjects");
-const {DataHelper} = require("../helpers/DataHelper");
+const {describe, test, beforeAll} = require("@jest/globals");
+const {MainPage, LoginPage, CookiesPage, RegistrationPage, RegistrationExpectations} = require("../pageObjects");
+const {DataHelper} = require("../helpers");
+
+const email = DataHelper.generateRandomEmail();
+const password = DataHelper.generateRandomValidPassword();
 
 describe("Authorisation tests", () => {
   beforeAll(async () => {
@@ -8,10 +11,9 @@ describe("Authorisation tests", () => {
   });
 
   test("Should be possible to register new user", async () => {
-    const email = DataHelper.generateRandomEmail();
-    const password = DataHelper.generateRandomPassword();
     allure.parameter("email", email);
     allure.parameter("password", password);
+    let name, lastname;
 
     await allure.step("Accept all cookies", async () => {
       await CookiesPage.acceptAllCookies();
@@ -26,10 +28,10 @@ describe("Authorisation tests", () => {
       await RegistrationPage.setTitle();
     });
     await allure.step("Fill first name", async () => {
-      await RegistrationPage.fillFirstName();
+      name = await RegistrationPage.fillFirstName();
     });
     await allure.step("Fill last name", async () => {
-      await RegistrationPage.fillLastName();
+      lastname = await RegistrationPage.fillLastName();
     });
     await allure.step("Fill email", async () => {
       await RegistrationPage.fillEmail(email);
@@ -44,7 +46,11 @@ describe("Authorisation tests", () => {
       await RegistrationPage.checkConsentCheckbox();
     });
     await allure.step("Press next button", async () => {
-      await RegistrationPage.setTitle();
+      await RegistrationPage.pressNextButtonAndWaitForRequest();
     });
+
+    await allure.step("Check that user logged in", async () => {
+      await RegistrationExpectations.checkThatUserRegisteredAndLoggedIn(name, lastname)
+    })
   });
 });

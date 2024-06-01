@@ -1,10 +1,28 @@
+const {expect} = require("@jest/globals");
 const randomNames = require('random-name');
+
+const {DataHelper, ElementsHelper} = require("../helpers");
+const {MainPage} = require("./mainPage");
+const {account} = require("./components/accountComponents");
 const {registration} = require("./components/registrationComponents");
-const {ElementsHelper} = require("../helpers/ElementsHelper");
 
 exports.RegistrationPage = class RegistrationPage {
   static async registerUser(email, password) {
-    await this.
+    if (!email) {
+      email = DataHelper.generateRandomEmail();
+    }
+    if (!password) {
+      password = DataHelper.generateRandomValidPassword();
+    }
+    await this.setTitle();
+    const name = await this.fillFirstName();
+    const lastName = await this.fillLastName();
+    await this.fillEmail(email);
+    await this.fillPassword(password);
+    await this.fillPasswordConfirmation(password);
+    await this.checkConsentCheckbox();
+    await this.pressNextButtonAndWaitForRequest();
+    return [name, lastName, email, password];
   }
 
   static async setTitle() {
@@ -47,5 +65,21 @@ exports.RegistrationPage = class RegistrationPage {
 
   static async pressNextButton() {
     await registration.nextButton.click();
+  }
+
+  static async pressNextButtonAndWaitForRequest() {
+    const responsePromise = page.waitForResponse(response =>
+      response.url().includes('https://www.sofa.de/api/global/register')
+    );
+    await registration.nextButton.click();
+    const response = await responsePromise;
+    return response.ok();
+  }
+}
+
+exports.RegistrationExpectations = class RegistrationExpectations {
+  static async checkThatUserRegisteredAndLoggedIn(name, lastName) {
+    await MainPage.clickOnAccountButton();
+    await expect(await account.welcomeText.innerText()).toContain(`${name} ${lastName}`)
   }
 }

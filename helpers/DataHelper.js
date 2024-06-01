@@ -5,8 +5,8 @@ exports.DataHelper = class DataHelper {
     return `test-${uuidv4()}@testMail.com`;
   }
 
-  static generateRandomPassword() {
-    return `password-${uuidv4()}`;
+  static generateRandomValidPassword() {
+    return `Pass!1-${uuidv4()}`;
   }
 
   static async delay(milliseconds) {
