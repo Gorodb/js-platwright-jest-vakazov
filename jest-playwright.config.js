@@ -9,7 +9,7 @@ module.exports = {
   testPath: "./tests",
   launchOptions: {
     devtools: false,
-    headless: true,
+    headless: false,
   },
   contextOptions: {
     ignoreHTTPSErrors: true,

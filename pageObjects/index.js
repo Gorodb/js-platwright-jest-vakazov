@@ -1,5 +1,5 @@
 const {MainPage} = require("./mainPage");
-const {LoginPage} = require("./loginPage");
+const {LoginPage, LoginPageExpectations} = require("./loginPage");
 const {CookiesPage} = require("./cookiesPage");
 const {RegistrationPage, RegistrationExpectations} = require("./registrationPage");
 
@@ -9,4 +9,5 @@ module.exports = {
   CookiesPage,
   RegistrationPage,
   RegistrationExpectations,
+  LoginPageExpectations
 }

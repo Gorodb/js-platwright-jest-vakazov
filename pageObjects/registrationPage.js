@@ -6,7 +6,7 @@ const {MainPage} = require("./mainPage");
 const {account} = require("./components/accountComponents");
 const {registration} = require("./components/registrationComponents");
 
-exports.RegistrationPage = class RegistrationPage {
+class RegistrationPage {
   static async registerUser(email, password) {
     if (!email) {
       email = DataHelper.generateRandomEmail();
@@ -31,14 +31,14 @@ exports.RegistrationPage = class RegistrationPage {
     await registration.title.selectOption(mailOption);
   }
 
-  static async fillFirstName() {
-    const firstName = randomNames.first();
+  static async fillFirstName(firstName) {
+    firstName = firstName ? firstName : randomNames.first();
     await ElementsHelper.clearAndFill(registration.firstName, firstName);
     return firstName;
   }
 
-  static async fillLastName() {
-    const lastName = randomNames.last();
+  static async fillLastName(lastName) {
+    lastName = lastName ? lastName : randomNames.last();
     await ElementsHelper.clearAndFill(registration.lastName, lastName);
     return lastName;
   }
@@ -77,9 +77,12 @@ exports.RegistrationPage = class RegistrationPage {
   }
 }
 
-exports.RegistrationExpectations = class RegistrationExpectations {
+class RegistrationExpectations {
   static async checkThatUserRegisteredAndLoggedIn(name, lastName) {
     await MainPage.clickOnAccountButton();
     await expect(await account.welcomeText.innerText()).toContain(`${name} ${lastName}`)
   }
 }
+
+exports.RegistrationPage = RegistrationPage;
+exports.RegistrationExpectations = RegistrationExpectations;

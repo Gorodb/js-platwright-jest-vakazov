@@ -6,8 +6,8 @@
   "scripts": {
     "playwright": "npx playwright install",
     "pretest": "rm -rf allure-results && rm -rf allure-report",
-    "run-test": "jest --maxWorkers=3",
-    "local": "npm-run-all playwright jest",
+    "run-test": "jest",
+    "local": "npm-run-all playwright run-test",
     "test": "npm-run-all playwright run-test allure_send --continue-on-error",
     "test.watch": "jest --watchAll",
     "allure_run": "yarn allure generate allure-results --clean -o allure-report && yarn allure open allure-report",
