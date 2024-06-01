@@ -6,7 +6,7 @@ exports.registration = {
   defaultOption: page.locator("[data-testid='defaultValue']"),
   firstName: page.locator("[data-testid='firstNameInput']"),
   lastName: page.locator("[data-testid='lastNameInput']"),
-  email: page.locator("[data-testid='emailInput']"),
+  email: page.locator("//*[@id='register-form']//*[@data-testId='emailInput']"),
   password: page.locator("[data-testid='passwordInput']"),
   passwordRepeat: page.locator("[data-testid='password2Input']"),
   subscriptionCheckBox: page.locator("[data-testid='newsletterCheckbox']"),

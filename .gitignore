@@ -1,3 +1,7 @@
+# Project
+allure-results/
+allure-report/
+
 # OSX
 .DS_Store
 
@@ -9,5 +13,5 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
-#secrets
+# secrets
 .env

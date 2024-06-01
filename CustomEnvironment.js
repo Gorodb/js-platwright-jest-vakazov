@@ -12,7 +12,8 @@ class CustomEnvironment extends PlaywrightEnvironment {
 
   // handle test fails to take screenshot and automatically attach to allure reports
   async handleTestEvent(event) {
-    await super.handleTestEvent(event)
+    await super.handleTestEvent(event);
+
     if (event.name === 'test_done' && event.test.errors.length > 0) {
       const screenshot = await this.global.page.screenshot();
       await this.global.allure.attachment("screenshot", screenshot, 'image/png');
