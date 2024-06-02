@@ -11,6 +11,25 @@ Use one of the separators: `,.;` to split browsers.
 
 Run `npm test` command to run all tests
 
+## Run in docker
+Install [docker](https://docs.docker.com/engine/install/) first.
+
+There are 2 options to run tests in docker:
+- local code base with docker-compose
+- run stored in docker image code
+
+### Local code base
+Clone this repository to your laptop/PC. Open its folder and install dependencies `npm install`. 
+
+Run command `docker-compose up`.
+
+### Run tests inside docker image
+You don't need to clone the repo. 
+
+Execute command: `docker run -it rvakazov/vakazov-playwright-docker-tests npm test`
+
+It will pull the image and run tests automatically.
+
 ## Reporter
 
 The `allure-reporter` is used for generating reports.
