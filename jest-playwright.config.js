@@ -1,8 +1,8 @@
 require('dotenv').config()
 
 // getting browsers from the environment variable on which tests will be run
-let browsers = process.env.BROWSERS.split(/[,.;\s]/) || ['chromium']
-console.log('Starting Browsers: ', browsers)
+let browsers = process.env.BROWSERS.split(/[,.;\s]/) || ['chromium'];
+console.log('Starting Browsers: ', browsers);
 
 module.exports = {
   report: [],

@@ -131,6 +131,7 @@ describe("Authorisation tests", () => {
   test("Should be login error messages if session expired, session should renew automatically", async () => {
     await allure.step("Clean cookies and accept terms and conditions", async () => {
       await PageHelper.reloadPage();
+      // Clean cookies to remove current session to check that backend's error is handled
       await PageHelper.cleanCookies();
     });
     await allure.step("Fill email", async () => {

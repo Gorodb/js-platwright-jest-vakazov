@@ -1,14 +1,23 @@
 # Playwright, Jest & Allure test example
 
-## Setup
+## Setup and configuration
 
 Run `npm install` to install dependencies.
 
-Run `npm run test` command to run all tests
+Copy [.env.sample](.env.sample) to .env and change parameters as you wish.
+
+You can also provide one of _chromium, firefox, webkit_ or all browsers in .env file. 
+Use one of the separators: `,.;` to split browsers.
+
+Run `npm test` command to run all tests
 
 ## Reporter
 
 The `allure-reporter` is used for generating reports.
+
+Use command `npm run allure_send` to send your allure reports to remote hub.
+
+Allure server link: http://45.9.188.130:5015/en
 
 To run allure-reports locally after test, you can use command `npm run allure_run`.
 
