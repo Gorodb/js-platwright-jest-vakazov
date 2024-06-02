@@ -1,7 +1,7 @@
 // @ts-ignore
-const { existsSync, unlinkSync, copyFile, mkdir } = require("fs");
+const {existsSync, unlinkSync, copyFile} = require("fs");
 // @ts-ignore
-const { pack } = require("7zip-min");
+const {pack} = require("7zip-min");
 
 const requests = require("./api/requests/allureRequests");
 
