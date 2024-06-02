@@ -1,13 +1,14 @@
 const {expect} = require("@jest/globals");
 const randomNames = require('random-name');
 
-const {DataHelper, ElementsHelper} = require("../helpers");
+const {DataHelper, ElementsHelper, PageHelper} = require("../helpers");
 const {MainPage} = require("./mainPage");
 const {account} = require("./components/accountComponents");
 const {registration} = require("./components/registrationComponents");
 
 class RegistrationPage {
   static async registerUser(email, password) {
+    await PageHelper.waitForPageToBeLoaded();
     if (!email) {
       email = DataHelper.generateRandomEmail();
     }
@@ -73,6 +74,7 @@ class RegistrationPage {
     );
     await registration.nextButton.click();
     const response = await responsePromise;
+    await PageHelper.waitForPageToBeLoaded();
     return response.ok();
   }
 }

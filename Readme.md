@@ -52,12 +52,15 @@ after all expects assertAll function should be called
 `await softAssertion.assertAll();`
 
 ## Used technologies
+
 JavaScript
 
-Playwright
+[Playwright](https://playwright.dev/)
 
-Jest
+[Jest](https://jestjs.io/)
 
-Allure-reporter
+[Allure-reporter](jest-allure-circus)
 
-jest-playwright-preset 
+[jest-playwright-preset](https://www.npmjs.com/package/jest-playwright-preset) 
+
+[Fork of jest-playwright-preset](https://www.npmjs.com/package/jest-circus-playwright-allure)

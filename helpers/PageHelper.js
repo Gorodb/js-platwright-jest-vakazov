@@ -21,4 +21,23 @@ exports.PageHelper = class PageHelper {
   static async reloadPage() {
     await page.reload();
   }
+
+  // scrolls to element
+  static async scrollToElement(element) {
+    try {
+      await element.scrollIntoViewIfNeeded();
+    } catch {
+      console.error(`Can not scroll to element with locator '${element}'`)
+    }
+  }
+
+  // Sets url to be waited for after clicking by provided locator
+  static async waitForResponseAfterClick(locator, url) {
+    const responsePromise = page.waitForResponse(response =>
+      response.url().includes(url)
+    );
+    await locator.click();
+    const response = await responsePromise;
+    return response.ok();
+  }
 }

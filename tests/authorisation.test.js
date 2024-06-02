@@ -1,5 +1,5 @@
 const {describe, test, beforeAll} = require("@jest/globals");
-const {MainPage, LoginPage, CookiesPage, RegistrationPage, RegistrationExpectations, LoginPageExpectations} = require("../pageObjects");
+const {MainPage, LoginPage, CookiesModal, RegistrationPage, RegistrationExpectations, LoginPageExpectations} = require("../pageObjects");
 const {DataHelper, PageHelper} = require("../helpers");
 const randomNames = require("random-name");
 
@@ -20,7 +20,7 @@ describe("Authorisation tests", () => {
     allure.parameter("password", password);
 
     await allure.step("Accept all cookies", async () => {
-      await CookiesPage.acceptAllCookies();
+      await CookiesModal.acceptAllCookies();
     });
     await allure.step("Click on account icon", async () => {
       await MainPage.clickOnAccountButton();
@@ -61,7 +61,7 @@ describe("Authorisation tests", () => {
   test("Should be possible to login previously created user", async () => {
     await allure.step("Clean cookies and accept terms and conditions", async () => {
       await PageHelper.cleanCookiesAndReloadThePage();
-      await CookiesPage.acceptAllCookies();
+      await CookiesModal.acceptAllCookies();
     });
     await allure.step("Click on account icon", async () => {
       await MainPage.clickOnAccountButton();
@@ -88,7 +88,7 @@ describe("Authorisation tests", () => {
 
     await allure.step("Clean cookies and accept terms and conditions", async () => {
       await PageHelper.cleanCookiesAndReloadThePage();
-      await CookiesPage.acceptAllCookies();
+      await CookiesModal.acceptAllCookies();
     });
     await allure.step("Click on account icon", async () => {
       await MainPage.clickOnAccountButton();
@@ -111,7 +111,7 @@ describe("Authorisation tests", () => {
   test("Should not be possible to login with correct email and empty password", async () => {
     await allure.step("Clean cookies and accept terms and conditions", async () => {
       await PageHelper.cleanCookiesAndReloadThePage();
-      await CookiesPage.acceptAllCookies();
+      await CookiesModal.acceptAllCookies();
     });
     await allure.step("Click on account icon", async () => {
       await MainPage.clickOnAccountButton();

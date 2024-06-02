@@ -1,5 +1,5 @@
-const {mainScreen} = require("./components/mainScreenComponents");
 const {PageHelper} = require("../helpers/PageHelper");
+const {header} = require("./components/headerComponents");
 
 exports.MainPage = class MainPage {
   static async openMainPage() {
@@ -8,12 +8,16 @@ exports.MainPage = class MainPage {
   }
 
   static async clickOnAccountButton() {
-    await mainScreen.myAccount.waitFor({state: "visible"});
+    await header.myAccount.waitFor({state: "visible"});
     await PageHelper.waitForPageToBeLoaded();
-    await mainScreen.myAccount.click();
+    await header.myAccount.click();
   }
 
   static async clickOnCartButton() {
-    await mainScreen.cart.click();
+    await header.cart.click();
+  }
+
+  static async clickOnWishlistButton( ) {
+    await header.wishList.click()
   }
 }
