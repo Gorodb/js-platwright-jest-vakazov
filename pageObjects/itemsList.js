@@ -2,7 +2,6 @@ const {categoryItemsElements} = require("./components/itemsComponents");
 const {DataHelper, PageHelper} = require("../helpers");
 const {header} = require("./components/headerComponents");
 const {categoryItemLocators} = require("./components/itemComponents");
-const {wishlistLocators} = require("./components/wishlistComponents");
 
 class ItemsList {
   // this method goes through articles from random categories and adds item to wish list,
@@ -25,6 +24,8 @@ class ItemsList {
     return itemsInformation;
   }
 
+  // opens random category and then item from this category
+  // if item is already added to wishlist, it will try with another one until find not added one
   static async openRandomNotAddedToWishlistItemFromAnyCategory() {
     let isItemAlreadyAdded = true;
     while (isItemAlreadyAdded) {
@@ -34,6 +35,7 @@ class ItemsList {
     }
   }
 
+  // gets all the categories from the menu and opens one of them
   static async openRandomCategory() {
     // wait for categories to be loaded
     await DataHelper.waitUntil(
@@ -46,7 +48,12 @@ class ItemsList {
     await PageHelper.waitForPageToBeLoaded();
   }
 
+  // Clicks on random item from currently open category
   static async clickOnRandomItemFromTheCategory() {
+    // wait for items to be loaded
+    await DataHelper.waitUntil(
+      async () => (await categoryItemsElements.itemsAll.all()).length > 0
+    );
     await PageHelper.waitForPageToBeLoaded();
     // getting all items and randomly select one
     const allItems = await categoryItemsElements.itemsAll.all();
@@ -55,6 +62,7 @@ class ItemsList {
     await PageHelper.waitForPageToBeLoaded();
   }
 
+  // gets 5 random items from one category and adds them to wishlist
   static async selectFiveRandomItemsFromCategory() {
     // get all present on the page goods
     const allItems = await categoryItemsElements.itemsAll.all();

@@ -33,7 +33,7 @@ describe("Wish list and cart tests", () => {
       await LoginPage.clickOnRegistrationButton();
       await RegistrationPage.registerUser(email, password);
     });
-    await allure.step("Open to 5 random category and then random items from category", async () => {
+    await allure.step("Open 5 random categories and then random items from category and add them to wishlist", async () => {
       // if item already added to wish list it will go to the category again and select another one
       itemsArray = await ItemsList.addRandomItemsToWishList(5);
     });
