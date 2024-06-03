@@ -1,4 +1,5 @@
 const {expect} = require("@jest/globals");
+const {DataHelper} = require("./DataHelper");
 
 // this class collects different expectations and error messages for them
 // and if at least one expect function is failed all expects will be failed as well
@@ -38,7 +39,7 @@ exports.SoftAssertion = class SoftAssertion {
     }
 
     const toContainText = (expected, errorMessage) => {
-      if (!actual.includes(expected)) {
+      if (!DataHelper.clearString(actual).includes(DataHelper.clearString(expected))) {
         errorMessage = errorMessage ? errorMessage : `Expected: ${expected}, to contain text: ${actual}`;
         console.error(errorMessage);
         this.setFail(`✘ ${errorMessage}`)
@@ -77,7 +78,7 @@ exports.SoftAssertion = class SoftAssertion {
     if (this.isFail) {
       console.error(this.errors.join('\r\n'))
     }
-    await expect(this.isFail).toBeFalsy()
+    await expect(this.isFail).toBeEqual(false)
   }
 
   setFail(errorMessage) {

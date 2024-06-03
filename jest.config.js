@@ -12,6 +12,7 @@ module.exports = {
   "verbose": true,
   "setupFilesAfterEnv": [
     "./config.js",
+    "./customMatchers.js",
   ],
   reporters: [
     "default",

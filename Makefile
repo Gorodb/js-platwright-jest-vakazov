@@ -4,6 +4,11 @@ DOCKER_IMAGE := rvakazov/vakazov-playwright-docker-tests
 build:
 	docker build -t ${DOCKER_IMAGE} .
 
+.PHONY: update
+update:
+	docker build --no-cache --pull --tag "$(DOCKER_IMAGE)" .
+	docker push "$(DOCKER_IMAGE)"
+
 .PHONY: pull
 pull:
 	docker pull ${DOCKER_IMAGE}

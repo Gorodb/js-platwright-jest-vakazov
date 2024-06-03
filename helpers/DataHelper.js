@@ -18,17 +18,23 @@ exports.DataHelper = class DataHelper {
     });
   }
 
-  // wait for provided event to be true
+  // wait for provided event to be true or during timeout, 5s by default
   static async waitUntil(event, timeout = 5000) {
     let currentTime = Date.now();
     const waitUntil = currentTime + timeout;
+    let isEvent = false;
 
-    while (!(await event()) && currentTime < waitUntil) {
+    while (!isEvent && currentTime < waitUntil) {
+      try {
+        isEvent = await event();
+      } catch {
+        isEvent = false;
+      }
       await this.delay(500);
       currentTime = Date.now();
     }
 
-    return await event();
+    return isEvent;
   }
 
   // random integer value in provided range
@@ -60,5 +66,9 @@ exports.DataHelper = class DataHelper {
       itemsArray.push({item: randomItem, index: itemIndex});
     }
     return itemsArray;
+  }
+
+  static clearString(text) {
+    return text.replace(/(\r\n|\n|\r)/gm,"").replace(/\s+/g," ");
   }
 }

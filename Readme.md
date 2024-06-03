@@ -64,20 +64,23 @@ To avoid such situations I've implemented simple softAssertion class to have mul
 
 The usage: 
 
-create new instance
+- create new instance of the class:
 
 `const softAssertion = new SoftAssertion();`
 
-implement as many expects as you need using softAssertion's expect functions
+- implement as many expects as you need using softAssertion's expect functions:
 
 ```
 softAssertion.expect(...).toBeTrue("Custom error message");
 softAssertion.expect(await locatore.innerText()).notToContainText(text, "Custom error message");
 ```
 
-after all expects assertAll function should be called
+- after all expects assertAll function should be called:
 
 `await softAssertion.assertAll();`
+
+To show all collected error messages I've implemented one custom matcher in [customMatchers.js](customMatchers.js). 
+It allows me to provide actual, expected and also error message to be shown instead of predefined one.
 
 ## Used technologies
 

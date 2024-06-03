@@ -2,11 +2,13 @@ const {categoryItemsElements} = require("./components/itemsComponents");
 const {DataHelper, PageHelper} = require("../helpers");
 const {header} = require("./components/headerComponents");
 const {categoryItemLocators} = require("./components/itemComponents");
+const {wishlistLocators} = require("./components/wishlistComponents");
 
 class ItemsList {
   // this method goes through articles from random categories and adds item to wish list,
   // also collects basic information: article number, price and title to be checked in wishlist
   static async addRandomItemsToWishList(count) {
+    // sometimes page is still loading
     let itemsInformation = [];
     // get all present on the page items
     for (let i = 0; i < count; i++) {
@@ -23,15 +25,6 @@ class ItemsList {
     return itemsInformation;
   }
 
-  static async clickOnRandomItemFromTheCategory() {
-    await PageHelper.waitForPageToBeLoaded();
-    // getting all items and randomly select one
-    const allItems = await categoryItemsElements.itemsAll.all();
-    const randomItem = await DataHelper.getRandomItemFromArray(allItems);
-    await randomItem.click();
-    await PageHelper.waitForPageToBeLoaded();
-  }
-
   static async openRandomNotAddedToWishlistItemFromAnyCategory() {
     let isItemAlreadyAdded = true;
     while (isItemAlreadyAdded) {
@@ -42,10 +35,23 @@ class ItemsList {
   }
 
   static async openRandomCategory() {
+    // wait for categories to be loaded
+    await DataHelper.waitUntil(
+      async () => (await header.categoryLinks.all()).length > 0
+    );
     await PageHelper.waitForPageToBeLoaded();
     // open random category which are present in the header
     const categories = await header.categoryLinks.all();
     await DataHelper.getRandomItemFromArray(categories).click();
+    await PageHelper.waitForPageToBeLoaded();
+  }
+
+  static async clickOnRandomItemFromTheCategory() {
+    await PageHelper.waitForPageToBeLoaded();
+    // getting all items and randomly select one
+    const allItems = await categoryItemsElements.itemsAll.all();
+    const randomItem = await DataHelper.getRandomItemFromArray(allItems);
+    await randomItem.click();
     await PageHelper.waitForPageToBeLoaded();
   }
 

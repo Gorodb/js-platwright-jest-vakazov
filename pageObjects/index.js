@@ -3,7 +3,8 @@ const {LoginPage, LoginPageExpectations} = require("./loginPage");
 const {CookiesModal} = require("./cookiesModal");
 const {RegistrationPage, RegistrationExpectations} = require("./registrationPage");
 const {ItemsList} = require("./itemsList");
-const {WishListExpectations} = require("./wishListPage");
+const {WishList, WishListExpectations} = require("./wishListPage");
+const {CartExpectations} = require("./cartPage");
 
 
 module.exports = {
@@ -14,5 +15,7 @@ module.exports = {
   RegistrationExpectations,
   LoginPageExpectations,
   ItemsList,
-  WishListExpectations
+  WishList,
+  WishListExpectations,
+  CartExpectations,
 }

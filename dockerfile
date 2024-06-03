@@ -17,6 +17,7 @@ COPY .env /app/
 COPY archiver.js /app/
 COPY config.js /app/
 COPY CustomEnvironment.js /app/
+COPY customMatchers.js /app/
 COPY jest.config.js /app/
 COPY jest-playwright.config.js /app/
 
