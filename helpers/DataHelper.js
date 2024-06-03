@@ -68,6 +68,7 @@ exports.DataHelper = class DataHelper {
     return itemsArray;
   }
 
+  // clears string from new line symbols and replaces double space with one
   static clearString(text) {
     return text.replace(/(\r\n|\n|\r)/gm,"").replace(/\s+/g," ");
   }
